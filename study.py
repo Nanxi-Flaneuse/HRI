@@ -1,0 +1,44 @@
+import time
+from spherov2 import scanner
+from spherov2.sphero_edu import SpheroEduAPI
+from spherov2.types import Color
+from gtts import gTTS
+import os
+from utils import *
+import numpy as np
+
+
+tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 feet away for 20 seconds!","cross":"I know a good strech! Cross your legs and touch your toes, then slowly come up, verterbrate by verterbrate!","shake":"Shake your arms and legs and loosen your muscle!","yoga":"You can get on the floor and do some baby pose to strech your back!"}
+# tip = np.random.choice(list(tips.keys()), 1)
+# print(tip[0])
+# print(tips[tip[0]])
+
+toy = scanner.find_toy(toy_name="SB-69F1")
+with SpheroEduAPI(toy) as droid:
+    while True:
+        # time.sleep(1200)
+        speak("It is time to take a break, let's get up and stretch")
+        tip = np.random.choice(list(tips.keys()), 1)[0]
+        speak(tips[tip])
+
+        # social group
+        time.sleep(2)
+        speak("I will play some background music for you while you stretch!")
+        # play music
+        speak("Do you feel better now? Let's get back to work!")
+
+        # physical group
+        time.sleep(2)
+        if tip == 'eyes':
+            speak("You can juggle me around and focus your attention on me! That will also be a good exercise for your eyes")
+            # Sphero makes sound when being juggled
+        elif tip == 'cross':
+            speak("Let's play chase! I will run around the room now and you'll come and get me!")
+            # Sphero runs around
+        elif tip == "shake":
+            speak("Shake me up and down with your left hand! Am I heavy?")
+            # makes sound when shaken
+            speak("Now do the same with your right hand!")
+            # makes sound when shaken
+        elif tip == "yoga":
+            speak("As you relax, you can also roll me around with your hands! Feel my weight and the texture of my shell. Am I heavy or light? What's the texture of my shell?")
