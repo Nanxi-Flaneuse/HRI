@@ -13,4 +13,4 @@ def speak(text):
     os.system("afplay speech.mp3")
 
 def get_random_color():
-    return {'r': np.random.randint(255), 'g': np.random.randint(255), 'b': np.random.randint(255)}
+    return Color(r = np.random.randint(255), g = np.random.randint(255), b=np.random.randint(255))
