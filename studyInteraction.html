@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <tite> Robotics Study Instructions </tite>
+    <style>
+      nav {
+        background-color: #003366;
+        padding: 12px;
+        text-align: center;
+      }
+      nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover{
+        text-decoration: underline; 
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html"> Instructions </a>
+      <a href="pre-survey.html"> Pre-Study Survey </a>
+      <a href="studyInteraction.html"> Study Interaction </a>
+      <a href="mid-survey.html"> Mid-Study Survey </a>
+      <a href="post-survey.html"> Post-Study Survey </a>
+    </nav>
+    <h2> Study Sessions </h2>
+    <p> "Start Study" when you begin, "Stretch" when you stretch, and "Stop Study" when you end.</p>
+    <button id="startBtn" >Start Study</button>
+    <button id="stetchBtn" >Stretch</button>
+    <button id="stopBtn" >Stop Study</button>
+    <a href=""> Survey to be added in case user forgets to use the buttons above </a>
+
+    <p id="status"></p>
+
+    <script>
+       let startTime, stretchCount=0, stretchTimes = [];
+       document.getElementByID('startBtn').onclick = () => {
+         startTime = Date.now();
+         stretchCount = 0; 
+         stretchTimes = [];
+         document.getElementByID('status').textContent = "Study session in progress."
+         document.getElementByID('startBtn').disabled = true; 
+         document.getElementByID('stretchBtn').disabled = false; 
+         document.getElementByID('stopBtn').disabled = false; 
+       };
+      document.getElementByID('stretchBtn').onclick = () => {
+        stretchCount++;
+        count elapsed = (Date.now() - startTime) / 1000;
+        stretchTimes.push(elapsed);
+        document.getElementByID('status').textContent = 'Stretch taken';
+      };
+      document.getElementByID('stopBtn').onclick = () => {
+        const endTime = Date.now();
+        const totalTime = {endTime - startTime) / 1000
+
+        const data {
+          type: 'studyData',
+          totalTime,
+          stretchCount,
+          stretchTimes,
+        };
+        fetch('Date URL (Excel or Google Storage Sheet)', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        }).then(() => {
+          alert("Study session saved. You can close this window now."
+        };
+      };
+    </script>
+  </body>
+</html>
+
+
