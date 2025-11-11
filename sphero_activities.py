@@ -84,7 +84,7 @@ def eyes(droid):
     time.sleep(3)
     speak("You know, once when I did this activity, I saw a giant hawk perched right outside of my window. It was magnificent! Do you see a hawk right now?")
     time.sleep(2)
-    speak("If not, that's ok. You can keep staring at the distance until I remind you when time's up!")
+    speak("If not, that's ok. Move your eyes upwards.....then look right as far as you can! Now look downwards towards the ground...Now move your eyes left.....and back up towards the sky!")
     time.sleep(8)
     droid.set_main_led(Color(r=0, g=150, b=0))
     droid.spin(360, 0.5)
