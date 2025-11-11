@@ -15,7 +15,7 @@ tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 fee
 # tip = np.random.choice(list(tips.keys()), 1)
 # print(tip[0])
 # print(tips[tip[0]])
-def yoga():
+def yoga(droid):
     speak("Start by standing tall, feet grounded, and take a deep breath in.")
     time.sleep(3)
     speak("Now reach your arms up overhead and stretch toward the sky. Don't forget to breathe")
@@ -37,7 +37,8 @@ def yoga():
     speak("Bring your hands together at your heart and take one last deep breath in.")
     # set_main_led("white")
     time.sleep(3)
-    speak("Great job! Your body and mind thank you. Namaste.")
+    droid.spin(360, 0.3)
+    speak("Great job! This is the end of our yoga session. Namaste.")
     time.sleep(2)
 
 def shake(droid):
@@ -78,10 +79,13 @@ def cross(droid):
     speak("Now, slowly come up again, vertebrate by vertebrate. How do you feel?")
 
 
-def eyes():
+def eyes(droid):
     speak("What do you see in the distance? Are there any houses or trees? Anything that looks interesting to you?")
     time.sleep(3)
     speak("You know, once when I did this activity, I saw a giant hawk perched right outside of my window. It was magnificent! Do you see a hawk right now?")
     time.sleep(2)
     speak("If not, that's ok. You can keep staring at the distance until I remind you when time's up!")
     time.sleep(8)
+    droid.set_main_led(Color(r=0, g=150, b=0))
+    droid.spin(360, 0.5)
+    droid.set_main_led(Color(r=0, g=0, b=0))
