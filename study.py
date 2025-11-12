@@ -34,13 +34,13 @@ def main(behavior = 'social'):
                 # social group
                 time.sleep(1)
                 if tip == 'eyes':
-                    eyes(droid)
+                    eyes(droid,behavior)
                 elif tip == 'cross':
-                    cross(droid)
+                    cross(droid,behavior)
                 elif tip == "shake":
-                    shake(droid)
+                    shake(droid,behavior)
                 elif tip == 'yoga':
-                    yoga(droid)
+                    yoga(droid,behavior)
                 
 
             # # physical group

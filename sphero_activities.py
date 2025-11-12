@@ -7,7 +7,7 @@ import os
 from utils import *
 import numpy as np
 
-
+# all activity tipes
 tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 feet away for 20 seconds!",
         "cross":"I know a good strech! Cross your legs and touch your toes.",
         "shake":"Let's play a game called shake shake shake!",
@@ -15,77 +15,106 @@ tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 fee
 # tip = np.random.choice(list(tips.keys()), 1)
 # print(tip[0])
 # print(tips[tip[0]])
-def yoga(droid):
-    speak("Start by standing tall, feet grounded, and take a deep breath in.")
-    time.sleep(3)
-    speak("Now reach your arms up overhead and stretch toward the sky. Don't forget to breathe")
-    # droid.spin(45, 0.3)
-    # spin(-45, 0.3)
-    time.sleep(3)
-    speak("Exhale, bend forward slowly, and let your arms hang loose.")
-    # roll(180, 40, 1)
-    time.sleep(4)
-    speak("Now step back into a gentle plank pose.")
-    # roll(0, 60, 1.5)
-    time.sleep(4)
-    speak("Lower your knees and press into child's pose. Breathe deeply.")
-    # set_main_led("blue")
-    time.sleep(5)
-    speak("When you're ready, slowly roll up to a seated position.")
-    # roll(180, 40, 1)
-    time.sleep(3)
-    speak("Bring your hands together at your heart and take one last deep breath in.")
-    # set_main_led("white")
-    time.sleep(3)
-    droid.spin(360, 0.3)
-    speak("Great job! This is the end of our yoga session. Namaste.")
-    time.sleep(2)
 
-def shake(droid):
-    speak("Follow my instructions! This is a fun exercise I used to do back at the Sphero Choral Music Society!")
-    time.sleep(0.2)
-    speak("For each limb, I will count from 1 to a certain number, and you will keep shaking that limb till I finish counting. Ready?")
-    time.sleep(0.5)
-    speak("ok! Let's get started")
-    for i in ['1,2,3,4','1,2,3','1,2','1']:
-        droid.spin(120, 0.3)
-        speak("Shake your left arm!" + i)
-        # time.sleep(0.1)
-        droid.spin(-120, 0.3)
-        speak("Shake your right arm!" + i)
-        # time.sleep(0.1)
+#################################################
+# all functions for Sphero's social behavior
+#################################################
+
+# function for sphero yoga activity
+def yoga(droid, behavior = 'social'):
+    if behavior == 'social':
+        speak("Start by standing tall, feet grounded, and take a deep breath in.")
+        time.sleep(3)
+        speak("Now reach your arms up overhead and stretch toward the sky. Don't forget to breathe")
+        # droid.spin(45, 0.3)
+        # spin(-45, 0.3)
+        time.sleep(3)
+        speak("Exhale, bend forward slowly, and let your arms hang loose.")
+        # roll(180, 40, 1)
+        time.sleep(4)
+        speak("Now step back into a gentle plank pose.")
+        # roll(0, 60, 1.5)
+        time.sleep(4)
+        speak("Lower your knees and press into child's pose. Breathe deeply.")
+        # set_main_led("blue")
+        time.sleep(5)
+        speak("When you're ready, slowly roll up to a seated position.")
+        # roll(180, 40, 1)
+        time.sleep(3)
+        speak("Bring your hands together at your heart and take one last deep breath in.")
+        # set_main_led("white")
+        time.sleep(3)
         droid.spin(360, 0.3)
-        speak("Shake your left leg!" + i)
-        # time.sleep(0.1)
-        droid.spin(-360, 0.3)
-        speak("Shake your right leg!" + i)
-        # time.sleep(0.1)
-    time.sleep(0.5)
-    speak("That's it. I hope you feel refreshed!")
+        speak("Great job! This is the end of our yoga session. Namaste.")
+        time.sleep(2)
+    else:
+        pass
 
-def cross(droid):
-    speak("Let's stay down here for 5 seconds.")
-    for i in range(1,6):
-        speak(str(i))
+# function for sphero shake activity
+def shake(droid, behavior = 'social'):
+    if behavior == 'social':
+        speak("Follow my instructions! This is a fun exercise I used to do back at the Sphero Choral Music Society!")
+        time.sleep(0.2)
+        speak("For each limb, I will count from 1 to a certain number, and you will keep shaking that limb till I finish counting. Ready?")
         time.sleep(0.5)
-    speak("now slowly come up, vertebrate by vertebrate.")
-    droid.spin(360, 0.5)
-    droid.set_main_led(get_random_color())
-    speak("Oh wow do you feel that stretch? Feels so good! Now let's switch to the other side!")
-    for i in range(1,6):
-        speak(str(i))
+        speak("ok! Let's get started")
+        for i in ['1,2,3,4','1,2,3','1,2','1']:
+            droid.set_main_led(get_random_color())
+            droid.spin(120, 0.3)
+            speak("Shake your left arm!" + i)
+            droid.set_main_led(get_random_color())
+            droid.spin(-120, 0.3)
+            speak("Shake your right arm!" + i)
+            droid.set_main_led(get_random_color())
+            droid.spin(360, 0.3)
+            speak("Shake your left leg!" + i)
+            droid.set_main_led(get_random_color())
+            droid.spin(-360, 0.3)
+            speak("Shake your right leg!" + i)
+            # time.sleep(0.1)
         time.sleep(0.5)
-    droid.set_main_led(Color(r=0, g=0, b=0))
-    speak("Now, slowly come up again, vertebrate by vertebrate. How do you feel?")
+        speak("That's it. I hope you feel refreshed!")
+        droid.spin(360, 0.5)
+        droid.set_main_led(Color(r=0, g=0, b=0))
+    else:
+        pass
+
+# function for sphero stretch activity
+def cross(droid, behavior = 'social'):
+    if behavior == 'social':
+        speak("Let's stay down here for 5 seconds.")
+        for i in range(1,6):
+            speak(str(i))
+            time.sleep(0.5)
+        speak("now slowly come up, vertebrate by vertebrate.")
+        droid.spin(360, 0.5)
+        droid.set_main_led(get_random_color())
+        speak("Oh wow do you feel that stretch? Feels so good! Now let's switch to the other side!")
+        for i in range(1,6):
+            speak(str(i))
+            time.sleep(0.5)
+        droid.set_main_led(Color(r=0, g=0, b=0))
+        speak("Now, slowly come up again, vertebrate by vertebrate. How do you feel?")
+    else:
+        pass
+
+# function for eye exercise
+def eyes(droid, behavior = 'social'):
+    if behavior == 'social':
+        speak("What do you see in the distance? Are there any houses or trees? Anything that looks interesting to you?")
+        time.sleep(3)
+        speak("You know, once when I did this activity, I saw a giant hawk perched right outside of my window. It was magnificent! Do you see a hawk right now?")
+        time.sleep(2)
+        speak("If not, that's ok. Move your eyes upwards.....then look right as far as you can! Now look downwards towards the ground...Now move your eyes left.....and back up towards the sky!")
+        time.sleep(8)
+        droid.set_main_led(Color(r=0, g=150, b=0))
+        droid.spin(360, 0.5)        
+        droid.set_main_led(Color(r=0, g=0, b=0))
+    else:
+        pass
 
 
-def eyes(droid):
-    speak("What do you see in the distance? Are there any houses or trees? Anything that looks interesting to you?")
-    time.sleep(3)
-    speak("You know, once when I did this activity, I saw a giant hawk perched right outside of my window. It was magnificent! Do you see a hawk right now?")
-    time.sleep(2)
-    speak("If not, that's ok. Move your eyes upwards.....then look right as far as you can! Now look downwards towards the ground...Now move your eyes left.....and back up towards the sky!")
-    time.sleep(8)
-    droid.set_main_led(Color(r=0, g=150, b=0))
-    droid.spin(360, 0.5)
-    droid.set_main_led(Color(r=0, g=0, b=0))
+#################################################
+# all functions for Sphero's physical behavior
+#################################################
+    
