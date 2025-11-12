@@ -10,17 +10,12 @@ from sphero_activities import *
 import random
 import asyncio
 
-
-# activities = [0,1,2,3]
-# keys = list(tips.keys())
-# toy = scanner.find_toy(toy_name="SB-69F1")
-
 def main(behavior = 'social'):
     activities = [0,1,2,3]
     keys = list(tips.keys())
     toy = scanner.find_toy(toy_name="SB-69F1")
     with SpheroEduAPI(toy) as droid:
-
+        # randomly shuffle the order of activities
         random.shuffle(activities)
         activity_order = activities[:]
         i = 0
@@ -28,6 +23,7 @@ def main(behavior = 'social'):
             time.sleep(1200)
             # await asyncio.sleep(5)
             speak("It is time to take a break, let's get up and stretch")
+            # pick an activity
             tip = keys[activity_order[i]]
             speak(tips[tip])
             if behavior == 'social':
@@ -43,7 +39,7 @@ def main(behavior = 'social'):
                     yoga(droid,behavior)
                 
 
-            # # physical group
+            # # physical group - actually will be implemented in sphero_activities.py
             elif behavior == 'physical':
                 time.sleep(2)
                 if tip == 'eyes':

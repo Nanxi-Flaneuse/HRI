@@ -12,13 +12,10 @@ tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 fee
         "cross":"I know a good strech! Cross your legs and touch your toes.",
         "shake":"Let's play a game called shake shake shake!",
         "yoga":"Are you ready for some yoga?"}
-# tip = np.random.choice(list(tips.keys()), 1)
-# print(tip[0])
-# print(tips[tip[0]])
 
-#################################################
-# all functions for Sphero's social behavior
-#################################################
+###############################################################
+# all functions for Sphero's social and physical behavior
+###############################################################
 
 # function for sphero yoga activity
 def yoga(droid, behavior = 'social'):
@@ -113,8 +110,4 @@ def eyes(droid, behavior = 'social'):
     else:
         pass
 
-
-#################################################
-# all functions for Sphero's physical behavior
-#################################################
     
