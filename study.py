@@ -21,6 +21,7 @@ def main(behavior = 'social'):
         i = 0
         while True:
             time.sleep(1200)
+            # time.sleep(5)
             # await asyncio.sleep(5)
             speak("It is time to take a break, let's get up and stretch")
             # pick an activity
@@ -32,7 +33,7 @@ def main(behavior = 'social'):
                 if tip == 'eyes':
                     eyes(droid,behavior)
                 elif tip == 'cross':
-                    cross(droid,behavior)
+                    stretch(droid,behavior)
                 elif tip == "shake":
                     shake(droid,behavior)
                 elif tip == 'yoga':
@@ -61,6 +62,5 @@ def main(behavior = 'social'):
                 i = 0
             else:
                 i += 1
-
 if __name__ == '__main__':
     main()
