@@ -20,8 +20,8 @@ def main(behavior = 'social'):
         activity_order = activities[:]
         i = 0
         while True:
-            time.sleep(1200)
-            # time.sleep(5)
+            # time.sleep(1200)
+            time.sleep(5)
             # await asyncio.sleep(5)
             speak("It is time to take a break, let's get up and stretch")
             # pick an activity

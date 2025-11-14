@@ -1,6 +1,6 @@
 import time
 from spherov2 import scanner
-from spherov2.sphero_edu import SpheroEduAPI
+from spherov2.sphero_edu import SpheroEduAPI, EventType
 from spherov2.types import Color
 from gtts import gTTS
 import os
@@ -160,16 +160,22 @@ def eyes(droid, behavior = 'social'):
         # for _ in range(15):
         #     if droid.get_gyroscope()['pitch'] > 10 or droid.get_gyroscope()['roll'] > 10 or droid.get_gyroscope()['yaw'] > 10:
         #         speak("Weeeeeeeeee")
-
+async def on_freefall():
+    try:
+        await droid.set_main_led(Color(r=0, g=150, b=0)) #speak("Ouch!")
+    except:
+        print("collision not processed correctly")
 # this functio is for testing individual activity functions
 def individual_testing():
     toy = scanner.find_toy(toy_name="SB-69F1")
     with SpheroEduAPI(toy) as droid:
+        droid.register_event(EventType.on_gyro_max, on_freefall)
         # function to test
         # shake(droid)
         # cross(droid, 'physical')
         # eyes(droid, "physical")
         yoga(droid, 'physical')
+        
 
 if __name__ == '__main__':
     individual_testing()
