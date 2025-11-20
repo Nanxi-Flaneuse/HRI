@@ -4,14 +4,10 @@ from spherov2.sphero_edu import SpheroEduAPI, EventType
 from spherov2.types import Color
 from gtts import gTTS
 import os
-from utils import *
+from utils.utils import *
 import numpy as np
+import random
 
-'''improvements
-1. maybe can add some animaiton
-2. can add arrow display for direction. Can color code body bparts - red for arm. Maybe add a laugh
-
-'''
 # all activity tipes
 tips = {"eyes":"Do you want to relax your eyes? You can look at something 20 feet away for 20 seconds!",
         "cross":"I know a good strech! Cross your legs and touch your toes.",
@@ -111,7 +107,30 @@ def shake(droid, behavior = 'social'):
         droid.spin(360, 0.5)
         droid.set_main_led(Color(r=0, g=0, b=0))
     else:
-        pass
+        speak("Follow my instructions! This is a fun exercise I used to do back at the Sphero Choral Music Society!")
+        time.sleep(0.2)
+        speak("For each limb, I will count from 1 to a certain number, and you will keep shaking that limb till I finish counting. You will also take me in one of your hands and shake me. Ready?")
+        time.sleep(0.5)
+        speak("ok! Let's get started")
+        for i in ['1,2,3,4','1,2,3','1,2','1']:
+            droid.set_main_led(get_random_color())
+            speak("Shake your left arm!" + i)
+            droid.set_main_led(get_random_color())
+
+            speak("Shake your right arm!" + i)
+            droid.set_main_led(get_random_color())
+
+            speak("Shake your left leg!" + i)
+            droid.set_main_led(get_random_color())
+
+            speak("Shake your right leg!" + i)
+
+            # time.sleep(0.1)
+        speak("Wow I feel so dizzy from all that shaking! Do you?")
+        time.sleep(0.5)
+        speak("That's it. I hope you feel refreshed!")
+
+        droid.set_main_led(Color(r=0, g=0, b=0))
 
 # function for sphero stretch activity
 def stretch(droid, behavior = 'social'):
@@ -157,24 +176,31 @@ def eyes(droid, behavior = 'social'):
         time.sleep(2)
         speak("Now let's do something fun! Juggle me between your left and right hands and let your eyes trace my trajectory! We'll do this for 10 seconds.")
         # spehro makes weeeee sound when being juggled
-        # for _ in range(15):
-        #     if droid.get_gyroscope()['pitch'] > 10 or droid.get_gyroscope()['roll'] > 10 or droid.get_gyroscope()['yaw'] > 10:
-        #         speak("Weeeeeeeeee")
-async def on_freefall():
-    try:
-        await droid.set_main_led(Color(r=0, g=150, b=0)) #speak("Ouch!")
-    except:
-        print("collision not processed correctly")
+
+        x,y,z= 0,0,0
+        threshold = 50
+        for _ in range(150):
+            gyro = droid.get_gyroscope()
+            if gyro is not None:
+                # print(gyro)
+                if abs(gyro['z'] - z) > threshold and abs(gyro['x'] - x)> threshold and abs(gyro['y'] - y)> threshold:
+                    speak("Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+                    droid.set_main_led(get_random_color())
+                    if random.randint(1,6) <= 2:
+                        speak("Careful don't drop me!")
+                x,y,z = gyro['x'],gyro['y'],gyro['z']
+            time.sleep(0.2)
+
 # this functio is for testing individual activity functions
 def individual_testing():
     toy = scanner.find_toy(toy_name="SB-69F1")
     with SpheroEduAPI(toy) as droid:
-        droid.register_event(EventType.on_gyro_max, on_freefall)
+        # droid.register_event(EventType.on_collision, on_freefall)
         # function to test
-        # shake(droid)
+        shake(droid,'physical')
         # cross(droid, 'physical')
         # eyes(droid, "physical")
-        yoga(droid, 'physical')
+        # yoga(droid, 'physical')
         
 
 if __name__ == '__main__':
