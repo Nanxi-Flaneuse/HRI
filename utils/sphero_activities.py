@@ -180,7 +180,7 @@ def eyes(droid, behavior = 'social'):
 
         x,y,z= 0,0,0
         threshold = 50
-        max_threshold = 100
+        max_threshold = 300
         for _ in range(100):
             gyro = droid.get_gyroscope()
             if gyro is not None:
